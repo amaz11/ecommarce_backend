@@ -4,12 +4,11 @@ const cors = require("cors");
 require("jsonwebtoken");
 require("dotenv").config();
 const app = express();
+const connectDB = require("./db/db");
 
 //Router
 const authentication = require("./routes/authentication");
 
-// Database
-require("./db/db");
 var whitelist = ["http://localhost:3000/", "http://example2.com"];
 let corsOptions = {
   origin: function (origin, callback) {
@@ -60,6 +59,8 @@ app.use("/api/v1/productRn", require("./routes/productRn"));
 
 // Port
 const port = process.env.PORT || 4000;
-app.listen(port, () => {
-  console.log(`http://127.0.0.1:4000`);
+connectDB().then(() => {
+  app.listen(port, () => {
+    console.log(`http://127.0.0.1:4000`);
+  });
 });
