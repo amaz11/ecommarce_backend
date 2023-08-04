@@ -15,7 +15,7 @@ router
     }
   });
 
-router.route("/get/product").get(authorization, async (req, res) => {
+router.route("/get/product").get(async (req, res) => {
   try {
     const product = await productModel.find();
     return res.status(200).json(product);
