@@ -112,4 +112,17 @@ const signout = (req, res) => {
     message: "Sign Out",
   });
 };
-module.exports = { signup, signin, signout, getUser };
+
+module.exports = {
+  signup,
+  signin,
+  signout,
+  getUser,
+  getCustomer: async (req, res) => {
+    const customer = await userModel.find({ role: "user" });
+    if (!customer) {
+      return res.status(200).json({ message: "No Customer" });
+    }
+    res.status(200).json({ data: customer });
+  },
+};
