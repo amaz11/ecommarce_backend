@@ -119,7 +119,7 @@ module.exports = {
   signout,
   getUser,
   getCustomer: async (req, res) => {
-    const customer = await userModel.find({ role: "user" });
+    const customer = await userModel.find({ role: "user" }).select("-password");
     if (!customer) {
       return res.status(200).json({ message: "No Customer" });
     }
