@@ -54,7 +54,7 @@ app.use(cookieParser());
 // );
 
 //API
-app.use("/", authentication);
+app.use("/api/v1/", authentication);
 app.use("/api/v1/", require("./routes/product"));
 app.use("/api/v1/", require("./routes/order"));
 app.use("/api/v1/productRn", require("./routes/productRn"));
