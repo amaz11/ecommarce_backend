@@ -6,6 +6,7 @@ require("dotenv").config();
 const app = express();
 const connectDB = require("./db/db");
 const { sameSiteCookieMiddleware } = require("express-samesite-default");
+var cookieSession = require("cookie-session");
 
 //Router
 const authentication = require("./routes/authentication");
@@ -25,6 +26,16 @@ app.use(sameSiteCookieMiddleware());
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 app.use(cookieParser());
+app.use(
+  cookieSession({
+    name: "__session",
+    keys: ["key1"],
+    maxAge: 24 * 60 * 60 * 100,
+    secure: true,
+    httpOnly: true,
+    sameSite: "none",
+  })
+);
 app.use(
   cors({
     origin: ["http://127.0.0.1:3000/"],
