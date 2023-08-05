@@ -18,7 +18,7 @@ app.use(
     origin: ["http://127.0.0.1:3000/"],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     preflightContinue: true,
-    credentials: true,
+    credentials: false,
     // allowedHeaders: "Content-Type, Accept",
   })
 );
