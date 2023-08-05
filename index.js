@@ -27,7 +27,7 @@ app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["http://localhost:3000/"],
+    origin: ["http://127.0.0.1:3000/"],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     preflightContinue: true,
     credentials: true,
