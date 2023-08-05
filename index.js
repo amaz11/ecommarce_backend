@@ -11,21 +11,19 @@ var cookieSession = require("cookie-session");
 //Router
 const authentication = require("./routes/authentication");
 
-// var whitelist = ["http://localhost:3000/"];
-// let corsOptions = {
-//   origin: function (origin, callback) {
-//     if (whitelist.indexOf(origin) !== -1 || !origin) {
-//       callback(null, true);
-//     } else {
-//       callback(new Error("Not allowed by CORS"));
-//     }
-//   },
-// };
 //Middelware
-app.use(sameSiteCookieMiddleware());
 app.use(express.json({ limit: "10mb" }));
+app.use(
+  cors({
+    origin: ["http://127.0.0.1:3000/"],
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: true,
+    credentials: true,
+    // allowedHeaders: "Content-Type, Accept",
+  })
+);
+app.use(sameSiteCookieMiddleware());
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
-app.use(cookieParser());
 app.use(
   cookieSession({
     name: "__session",
@@ -36,15 +34,8 @@ app.use(
     sameSite: "none",
   })
 );
-app.use(
-  cors({
-    origin: ["http://127.0.0.1:3000/"],
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    preflightContinue: true,
-    credentials: true,
-    allowedHeaders: "Content-Type, Accept",
-  })
-);
+
+app.use(cookieParser());
 
 // app.use(cors());
 
