@@ -5,6 +5,7 @@ require("jsonwebtoken");
 require("dotenv").config();
 const app = express();
 const connectDB = require("./db/db");
+const { sameSiteCookieMiddleware } = require("express-samesite-default");
 
 //Router
 const authentication = require("./routes/authentication");
@@ -20,6 +21,7 @@ const authentication = require("./routes/authentication");
 //   },
 // };
 //Middelware
+app.use(sameSiteCookieMiddleware());
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 app.use(cookieParser());
