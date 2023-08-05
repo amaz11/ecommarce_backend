@@ -13,27 +13,28 @@ const authentication = require("./routes/authentication");
 
 //Middelware
 app.use(express.json({ limit: "10mb" }));
-app.use(
-  cors({
-    origin: ["http://127.0.0.1:3000/"],
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    preflightContinue: true,
-    credentials: false,
-    // allowedHeaders: "Content-Type, Accept",
-  })
-);
+// app.use(
+//   cors({
+//     origin: ["http://127.0.0.1:3000/"],
+//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+//     preflightContinue: true,
+//     credentials: false,
+//     // allowedHeaders: "Content-Type, Accept",
+//   })
+// );
+app.use(cors());
 app.use(sameSiteCookieMiddleware());
-app.use(express.urlencoded({ extended: true, limit: "10mb" }));
-app.use(
-  cookieSession({
-    name: "__session",
-    keys: ["key1"],
-    maxAge: 24 * 60 * 60 * 100,
-    secure: true,
-    httpOnly: true,
-    sameSite: "none",
-  })
-);
+// app.use(express.urlencoded({ extended: true, limit: "10mb" }));
+// app.use(
+//   cookieSession({
+//     name: "__session",
+//     keys: ["key1"],
+//     maxAge: 24 * 60 * 60 * 100,
+//     secure: true,
+//     httpOnly: true,
+//     sameSite: "none",
+//   })
+// );
 
 app.use(cookieParser());
 
