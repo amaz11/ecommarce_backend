@@ -11,6 +11,7 @@ const {
 } = require("../controller/auth");
 
 // Middelware
+
 const roleMiddleware = require("../middleware/roleMiddleware");
 
 //All Router For Sign Up & In
@@ -19,5 +20,5 @@ router.post("/sign-up", signup);
 router.post("/sign-in", signin);
 router.get("/sign-out", signout);
 router.get("/get-user", roleMiddleware, getUser);
-router.get("/customer", getCustomer);
+router.get("/customer", roleMiddleware, getCustomer);
 module.exports = router;
