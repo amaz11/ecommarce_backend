@@ -79,7 +79,6 @@ const signin = async (req, res) => {
         // console.log(req.cookies.jwt);
         return res.status(200).cookie("jwt", token, options).json({
           message: "Sign in Success",
-          data: user,
           access_token: token,
         });
       } else {
