@@ -11,13 +11,13 @@ const {
 } = require("../controller/auth");
 
 // Middelware
-const authorization = require("../middleware/authorization");
+const roleMiddleware = require("../middleware/roleMiddleware");
 
 //All Router For Sign Up & In
 const router = express.Router();
 router.post("/sign-up", signup);
 router.post("/sign-in", signin);
-router.get("/sign-out", authorization, signout);
-router.get("/get-user", authorization, getUser);
+router.get("/sign-out", signout);
+router.get("/get-user", roleMiddleware, getUser);
 router.get("/customer", getCustomer);
 module.exports = router;

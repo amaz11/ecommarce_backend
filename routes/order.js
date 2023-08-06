@@ -1,7 +1,7 @@
 const orderModel = require("../model/order");
 const router = require("express").Router();
-const authorization = require("../middleware/authorization");
 const roleMiddleware = require("../middleware/roleMiddleware");
+const authorization = require("../middleware/authorization");
 
 router.route("/post/order").post(async (req, res) => {
   try {
@@ -14,7 +14,7 @@ router.route("/post/order").post(async (req, res) => {
 });
 router
   .route("/get/order")
-  .get(authorization, roleMiddleware, async (req, res) => {
+  .get([authorization, roleMiddleware], async (req, res) => {
     try {
       const order = await orderModel.find();
       return res.status(200).json({ data: order });
