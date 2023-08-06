@@ -59,8 +59,8 @@ const signin = async (req, res) => {
       const passwordCheck = await bcrypt.compare(password, user.password);
       if (passwordCheck) {
         const options = {
-          httpOnly: false,
-          secure: false,
+          httpOnly: true,
+          secure: true,
           sameSite: "none",
           maxAge: 1000 * 60 * 60 * 24 * 7,
         };
