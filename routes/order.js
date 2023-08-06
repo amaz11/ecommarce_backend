@@ -12,13 +12,15 @@ router.route("/post/order").post(async (req, res) => {
     return res.status(500).json({ error: "something wrong" });
   }
 });
-router.route("/get/order").get(roleMiddleware, async (req, res) => {
-  try {
-    const order = await orderModel.find();
-    return res.status(200).json({ data: order });
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({ error: "Somthing Wrong" });
-  }
-});
+router
+  .route("/get/order")
+  .get(authorization, roleMiddleware, async (req, res) => {
+    try {
+      const order = await orderModel.find();
+      return res.status(200).json({ data: order });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ error: "Somthing Wrong" });
+    }
+  });
 module.exports = router;
